@@ -1,0 +1,5 @@
+services:
+    front_end.form.type.invoice:
+        class: FrontEndBundle\Form\Type\InvoiceType
+        tags:
+            - { name: form.type, alias: invoice }

@@ -1,0 +1,7 @@
+front_end_homepage:
+    path:     /
+    defaults: { _controller: FrontEndBundle:Default:index }
+
+front_end_create_invoice:
+    path:     /invoice/add
+    defaults: { _controller: FrontEndBundle:Default:addInvoice }
