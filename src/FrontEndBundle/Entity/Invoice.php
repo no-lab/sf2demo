@@ -45,7 +45,7 @@ class Invoice
     * @ORM\Column(type="datetime")
     */
     protected $updatedTime;
-
+    // @todo add 'debtorEmail'
     /**
      * Get id
      *

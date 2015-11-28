@@ -5,3 +5,7 @@ front_end_homepage:
 front_end_create_invoice:
     path:     /invoice/add
     defaults: { _controller: FrontEndBundle:Default:addInvoice }
+
+front_end_find_seller_action:
+    path:     /seller/find
+    defaults: { _controller: FrontEndBundle:Default:findSeller }
