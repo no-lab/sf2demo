@@ -37,6 +37,11 @@ class Invoice
     protected $sellerEmail;
 
     /**
+    * @ORM\Column(type="string", length=255)
+    */
+    protected $debtorEmail;
+
+    /**
     * @ORM\Column(type="datetime")
     */
     protected $createdTime;
@@ -45,7 +50,7 @@ class Invoice
     * @ORM\Column(type="datetime")
     */
     protected $updatedTime;
-    // @todo add 'debtorEmail'
+
     /**
      * Get id
      *
@@ -150,6 +155,30 @@ class Invoice
     public function getSellerEmail()
     {
         return $this->sellerEmail;
+    }
+
+    /**
+    * Set debtorEmail
+    *
+    * @param string $debtorEmail
+    *
+    * @return Invoice
+    */
+    public function setDebtorEmail($debtorEmail)
+    {
+        $this->debtorEmail = $debtorEmail;
+
+        return $this;
+    }
+
+    /**
+    * Get debtorEmail
+    *
+    * @return string
+    */
+    public function getDebtorEmail()
+    {
+        return $this->debtorEmail;
     }
 
     /**

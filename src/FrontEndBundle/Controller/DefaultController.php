@@ -46,12 +46,20 @@ class DefaultController extends Controller
 
     public function findSellerAction(Request $request)
     {
-        $demoEmails = array(
+        return new JsonResponse(array('items' => $this->searchFakeEmail()));
+    }
+
+    public function findDebtorAction(Request $request)
+    {
+        return new JsonResponse(array('items' => $this->searchFakeEmail()));
+    }
+
+    protected function searchFakeEmail()
+    {
+        return array(
             array('id' => 'alpha@test.com', 'text' => 'alpha@test.com'),
             array('id' => 'blue@test.com', 'text' => 'blue@test.com'),
             array('id' => 'charlie@test.com', 'text' => 'charlie@test.com'),
         );
-
-        return new JsonResponse(array('items' => $demoEmails));
     }
 }

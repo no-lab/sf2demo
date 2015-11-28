@@ -9,3 +9,7 @@ front_end_create_invoice:
 front_end_find_seller_action:
     path:     /seller/find
     defaults: { _controller: FrontEndBundle:Default:findSeller }
+
+front_end_find_debtor_action:
+    path:     /debtor/find
+    defaults: { _controller: FrontEndBundle:Default:findDebtor }

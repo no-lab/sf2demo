@@ -40,5 +40,33 @@ $(document).ready(function() {
             }
           }
     });
+
+    $('#invoice_debtorEmail').select2({
+        placeholder: 'Search for a debtor',
+        minimumInputLength: 3,
+        ajax: {
+            url: '{{ path('front_end_find_debtor_action') }}',
+            dataType: 'json',
+            quietMillis: 250,
+            data: function (term, page) {
+                return {
+                    q: term
+                };
+            },
+            results: function (data, page) {
+                return { results: data.items };
+            }
+        },
+        createSearchChoice: function(term, data) {
+            if ($(data).filter(function() {
+              return this.text.localeCompare(term) === 0;
+            }).length === 0) {
+              return {
+                id: term,
+                text: term
+              };
+            }
+          }
+    });
 });
 {% endblock %}

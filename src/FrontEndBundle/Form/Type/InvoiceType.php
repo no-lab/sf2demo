@@ -13,6 +13,7 @@ class InvoiceType extends AbstractType
             ->add('amount')
             ->add('reference')
             ->add('sellerEmail')
+            ->add('debtorEmail')
             ->add('save', 'submit')
         ;
     }
