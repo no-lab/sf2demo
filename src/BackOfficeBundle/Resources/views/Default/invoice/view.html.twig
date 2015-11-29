@@ -1,0 +1,9 @@
+<h1>View invoice</h1>
+
+<a href="{{ url('back_office_invoice_list') }}">back</a>
+
+{{ invoice.id }}<br>
+{{ invoice.amount|number_format(2, '.', ',') }}<br>
+{{ invoice.dueDate|date("Y-m-d") }}<br>
+{{ invoice.sellerEmail|e }}<br>
+{{ invoice.debtorEmail|e }}<br>

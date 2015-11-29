@@ -1,3 +1,11 @@
 back_office_homepage:
     path:     /
     defaults: { _controller: BackOfficeBundle:Default:index }
+
+back_office_invoice_list:
+    path:     /invoice/list
+    defaults: { _controller: BackOfficeBundle:Default:invoiceList }
+
+back_office_invoice_view:
+    path:     /invoice/view/{invoiceId}
+    defaults: { _controller: BackOfficeBundle:Default:invoiceView }

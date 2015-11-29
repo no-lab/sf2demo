@@ -1,0 +1,22 @@
+<h1>Invoices list</h1>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Amount</th>
+        <th>Due Date</th>
+        <th>Seller</th>
+        <th>Debtor</th>
+        <th>Action</th>
+    </tr>
+    {% for invoice in invoices %}
+    <tr>
+        <td>{{ invoice.id|e }}</td>
+        <td>{{ invoice.amount|number_format(2, '.', ',') }}</td>
+        <td>{{ invoice.dueDate|date("Y-m-d") }}</td>
+        <td>{{ invoice.sellerEmail|e }}</td>
+        <td>{{ invoice.debtorEmail|e }}</td>
+        <td><a href="{{ url('back_office_invoice_view', {'invoiceId': invoice.id}) }}">view</a></td>
+    </tr>
+    {% endfor %}
+</table>
