@@ -3,7 +3,9 @@
 namespace BackOfficeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use FrontEndBundle\Entity\Invoice;
+use BackOfficeBundle\Utils\EmailPlanner;
 
 class DefaultController extends Controller
 {
@@ -36,5 +38,17 @@ class DefaultController extends Controller
 
         return $this->render('BackOfficeBundle:Default:invoice/view.html.twig',
             array('invoice' => $invoice));
+    }
+
+    public function simulateSendingDateAction()
+    {
+        $timestamp = $this->get('request')->request->get('timestamp');
+        $startDate = new \DateTime();
+        $startDate->setTimestamp($timestamp);
+
+        $emailPlanner = new EmailPlanner($startDate);
+        $sendDate = $emailPlanner->findAvailableTime();
+
+        return new JsonResponse(array('data' => $sendDate));
     }
 }

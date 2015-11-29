@@ -2,13 +2,70 @@
 
 
 {% block content %}
-<h1>View invoice</h1>
+<div class="pull-right">
+    <a href="{{ url('back_office_invoice_list') }}" class="btn btn-default">Back to the list</a>
+</div>
 
-<a href="{{ url('back_office_invoice_list') }}">back</a>
+<div class="page-header">
+    <h1>View invoice <small>#{{ invoice.id }}</small></h1>
+</div>
 
-{{ invoice.id }}<br>
 {{ invoice.amount|number_format(2, '.', ',') }}<br>
 {{ invoice.dueDate|date("Y-m-d") }}<br>
 {{ invoice.sellerEmail|e }}<br>
 {{ invoice.debtorEmail|e }}<br>
+
+<div class="page-header">
+    <h2>Test email sender</h2>
+</div>
+
+<div class="row">
+    <div class='col-sm-6'>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker1'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class='col-sm-6'>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <span id="loading" class="pull-right"><span class="glyphicon glyphicon-refresh spinning"></span> Loading...</span>
+                <h3 class="panel-title">Email will be sent at:</h3>
+            </div>
+            <div class="panel-body">
+                <span id="sendin-date-at"></span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+$(document).ready(function () {
+    var loading = $('#loading');
+    $(document).ajaxStart(function () {
+        loading.show();
+    });
+
+    $(document).ajaxStop(function () {
+        loading.hide();
+    });
+
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+    }).on('dp.change', function(e) {
+        $('#sendin-date-at').html('...');
+        $.post('{{ url('back_office_simulate_sending_date') }}',
+            {timestamp: e.date.format('X')},
+            function(e) {
+                $('#sendin-date-at').html(moment(e.data.date).format('YYYY-MM-DD HH:mm:ss'));
+            }
+        );
+    });
+});
 {% endblock %}
