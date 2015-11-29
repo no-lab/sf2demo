@@ -9,6 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 */
 class Invoice
 {
+    const STATUS_APPROVED = 1;
+    const STATUS_NOT_APPROVED = 0;
+
+    public $availableStatus = array(
+        self::STATUS_APPROVED => 'Approved',
+        self::STATUS_NOT_APPROVED => 'Not Approved'
+    );
+
     /**
     * @ORM\Column(type="integer")
     * @ORM\Id
@@ -40,6 +48,11 @@ class Invoice
     * @ORM\Column(type="string", length=255)
     */
     protected $debtorEmail;
+
+    /**
+    * @ORM\Column(type="integer")
+    */
+    protected $status;
 
     /**
     * @ORM\Column(type="datetime")
@@ -179,6 +192,35 @@ class Invoice
     public function getDebtorEmail()
     {
         return $this->debtorEmail;
+    }
+
+    /**
+    * Set status
+    *
+    * @param integer $status
+    *
+    * @return Invoice
+    */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+    * Get status
+    *
+    * @return integer
+    */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function getStatusName()
+    {
+        return $this->availableStatus[$this->status];
     }
 
     /**

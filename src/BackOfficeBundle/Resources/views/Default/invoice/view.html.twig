@@ -10,10 +10,15 @@
     <h1>View invoice <small>#{{ invoice.id }}</small></h1>
 </div>
 
-{{ invoice.amount|number_format(2, '.', ',') }}<br>
-{{ invoice.dueDate|date("Y-m-d") }}<br>
-{{ invoice.sellerEmail|e }}<br>
-{{ invoice.debtorEmail|e }}<br>
+<p>
+    <b>Amount: </b>{{ invoice.amount|number_format(2, '.', ',') }}<br>
+    <b>Due date: </b>{{ invoice.dueDate|date("Y-m-d") }}<br>
+    <b>Seller email: </b>{{ invoice.sellerEmail|e }}<br>
+    <b>Debtor email: </b>{{ invoice.debtorEmail|e }}<br>
+    <b>Status: </b>{{ invoice.getStatusName }}<br>
+</p>
+<a href="{{ url('back_office_invoice_change_status', {invoiceId: invoice.id}) }}" class="btn btn-danger">Toggle status</a>
+
 
 <div class="page-header">
     <h2>Test email sender</h2>

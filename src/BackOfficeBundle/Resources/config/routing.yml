@@ -10,6 +10,10 @@ back_office_invoice_view:
     path:     /invoice/view/{invoiceId}
     defaults: { _controller: BackOfficeBundle:Default:invoiceView }
 
+back_office_invoice_change_status:
+    path:     /invoice/change-status/{invoiceId}
+    defaults: { _controller: BackOfficeBundle:Default:invoiceChangeStatus }
+
 back_office_simulate_sending_date:
     path:     /utils/simulate-sending-date
     defaults: { _controller: BackOfficeBundle:Default:simulateSendingDate }

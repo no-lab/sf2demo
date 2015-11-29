@@ -26,6 +26,7 @@ class DefaultController extends Controller
         if ($form->isValid()) {
             // @todo: check email
             $em = $this->getDoctrine()->getManager();
+            $invoice->setStatus(Invoice::STATUS_NOT_APPROVED);
 
             if (!$invoice->getId()) {
                 $invoice->setCreatedTime(new \DateTime());

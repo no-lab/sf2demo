@@ -11,6 +11,7 @@
         <th>Due Date</th>
         <th>Seller</th>
         <th>Debtor</th>
+        <th>Status</th>
         <th>Action</th>
     </tr>
     {% for invoice in invoices %}
@@ -20,6 +21,7 @@
         <td>{{ invoice.dueDate|date("Y-m-d") }}</td>
         <td>{{ invoice.sellerEmail|e }}</td>
         <td>{{ invoice.debtorEmail|e }}</td>
+        <td>{{ invoice.getStatusName }}</td>
         <td><a href="{{ url('back_office_invoice_view', {'invoiceId': invoice.id}) }}">view</a></td>
     </tr>
     {% endfor %}
