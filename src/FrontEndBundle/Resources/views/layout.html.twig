@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Symfony - Demo</title>
+        <link href="{{ asset('vendors/bootstrap-3.3.6/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('vendors/select2-3.5.3/select2.css') }}" rel="stylesheet" />
+        <link href="{{ asset('vendors/select2-3.5.3/select2-bootstrap.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
+    </head>
+    <body>
+        {% include('FrontEndBundle::Partials/mainMenu.html.twig') %}
+        <div id="content" class="container">
+            {% block content %}{% endblock %}
+        </div>
+        <script src="{{ asset('vendors/jquery-2.1.4.min.js') }}"></script>
+        <script src="{{ asset('vendors/bootstrap-3.3.6/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('vendors/select2-3.5.3/select2.min.js') }}"></script>
+        <script type="text/javascript">{% block scripts %}{% endblock %}</script>
+    </body>
+</html>
