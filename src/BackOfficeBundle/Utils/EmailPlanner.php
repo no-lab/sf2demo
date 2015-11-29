@@ -17,6 +17,8 @@
 
 namespace BackOfficeBundle\Utils;
 
+use BackOfficeBundle\Utils\ICalSimpleParser;
+
 date_default_timezone_set('UTC');
 
 class EmailPlanner
@@ -27,15 +29,20 @@ class EmailPlanner
     public function __construct($date)
     {
         $this->endDate = $date;
+
+        $iCalParser = new ICalSimpleParser(__DIR__ . '/../../../app/Resources/calendar.ics');
+        $this->holidays = $iCalParser->extract();
     }
 
-    public function isHolyday($date)
+    public function isHoliday($date)
     {
-        // @todo
+        if (in_array($date->format('Y-m-d'), $this->holidays)) {
+            return true;
+        }
         return false;
     }
 
-    public function handleHolyday() {
+    public function handleHoliday() {
         if ($this->isHolyday($this->endDate)) {
             $this->endDate->add(new \DateInterval('P1D'));
         }
@@ -161,7 +168,7 @@ class EmailPlanner
 
     public function findAvailableTime()
     {
-        $checkFunctions = array('Weekend', 'Morning', 'Afternoon');
+        $checkFunctions = array('Holiday', 'Weekend', 'Morning', 'Afternoon');
 
         while ($this->currentInterval != $this->targetInterval) {
             foreach($checkFunctions as $checkFunction) {
