@@ -6,7 +6,7 @@
  * Really simple (and dirty)
  * Should probably NOT used in production
  *
- * ICS source : http://www.officeholidays.com/ics/ics_country.php?tbl_country=Belgium
+ * ICS source : http://www.kayaposoft.com/enrico/ics/v1.0?country=bel&fromDate=01-01-2014&toDate=31-12-2016&en=1
  */
 
 namespace BackOfficeBundle\Utils;

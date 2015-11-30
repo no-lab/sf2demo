@@ -17,7 +17,7 @@ class IcalSimpleParserTest extends \PHPUnit_Framework_TestCase
     {
         $parser = new ICalSimpleParser($this->calendarFile);
         $dates = $parser->extract();
-        $this->assertEquals(count($dates), 174);
+        $this->assertEquals(count($dates), 36);
     }
 
     public function testResults()
