@@ -5,7 +5,3 @@ front_end:
 back_office:
     resource: "@BackOfficeBundle/Resources/config/routing.yml"
     prefix:   /backoffice
-
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
