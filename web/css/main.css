@@ -4,6 +4,10 @@ body {
 #loading {
     display: none;
 }
+.message {
+    padding: 15px;
+    border-radius: 5px;
+}
 .glyphicon.spinning {
     animation: spin 1s infinite linear;
     -webkit-animation: spin2 1s infinite linear;
