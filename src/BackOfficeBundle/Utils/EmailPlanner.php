@@ -43,8 +43,8 @@ class EmailPlanner
     }
 
     public function handleHoliday() {
-        if ($this->isHolyday($this->endDate)) {
-            $this->endDate->add(new \DateInterval('P1D'));
+        if ($this->isHoliday($this->endDate)) {
+            $this->gotoNextDay();
         }
     }
 
@@ -60,7 +60,7 @@ class EmailPlanner
     public function handleWeekend()
     {
         if ($this->isWeekend($this->endDate)) {
-            $this->endDate->add(new \DateInterval('P1D'));
+            $this->gotoNextDay();
         }
     }
 
@@ -93,13 +93,13 @@ class EmailPlanner
             $l->setTime(12, 0, 0);
 
             $availableInterval = $l->getTimestamp() - $this->endDate->getTimestamp();
-            $xx = $this->calculateInterval($this->targetInterval, $this->currentInterval, $availableInterval);
-            $this->currentInterval += $xx;
+            $interval = $this->calculateInterval($this->targetInterval, $this->currentInterval, $availableInterval);
+            $this->currentInterval += $interval;
 
             if ($this->currentInterval < $this->targetInterval) {
                 $this->endDate->setTime(13, 30, 0);
             } else {
-                $this->endDate->add(new \DateInterval('PT'.$xx.'S'));
+                $this->endDate->add(new \DateInterval('PT'.$interval.'S'));
             }
         }
         elseif ($this->isBeforeBusinessMorning($this->endDate)) {
@@ -143,17 +143,15 @@ class EmailPlanner
             $l->setTime(17, 0, 0);
 
             $availableInterval = $l->getTimestamp() - $this->endDate->getTimestamp();
-            $xx = $this->calculateInterval($this->targetInterval, $this->currentInterval, $availableInterval);
-            $this->currentInterval += $xx;
+            $interval = $this->calculateInterval($this->targetInterval, $this->currentInterval, $availableInterval);
+            $this->currentInterval += $interval;
             if ($this->currentInterval < $this->targetInterval) {
-                $this->endDate->add(new \DateInterval('P1D'));
-                $this->endDate->setTime(9, 0, 0);
+                $this->gotoNextDay();
             } else {
-                $this->endDate->add(new \DateInterval('PT'.$xx.'S'));
+                $this->endDate->add(new \DateInterval('PT'.$interval.'S'));
             }
         } elseif ($this->isAfterBusinessAfternoon($this->endDate)) {
-            $this->endDate->add(new \DateInterval('P1D'));
-            $this->endDate->setTime(9, 0, 0);
+            $this->gotoNextDay();
         }
     }
 
@@ -178,5 +176,11 @@ class EmailPlanner
         }
 
         return $this->endDate;
+    }
+
+    private function gotoNextDay()
+    {
+        $this->endDate->add(new \DateInterval('P1D'));
+        $this->endDate->setTime(9, 0, 0);
     }
 }
