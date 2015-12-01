@@ -13,6 +13,7 @@
 <p>
     <b>Amount: </b>{{ invoice.amount|number_format(2, '.', ',') }}<br>
     <b>Due date: </b>{{ invoice.dueDate|date("Y-m-d") }}<br>
+    <b>Reference: </b>{{ invoice.reference|e }}<br>
     <b>Seller email: </b>{{ invoice.sellerEmail|e }}<br>
     <b>Debtor email: </b>{{ invoice.debtorEmail|e }}<br>
     <b>Status: </b>{{ invoice.getStatusName }}<br>
