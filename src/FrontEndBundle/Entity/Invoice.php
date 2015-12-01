@@ -2,6 +2,7 @@
 namespace FrontEndBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * @ORM\Entity
@@ -26,26 +27,34 @@ class Invoice
 
     /**
     * @ORM\Column(type="datetime")
+    * @Assert\NotBlank()
     */
     protected $dueDate;
 
     /**
     * @ORM\Column(type="decimal", scale=2)
+    * @Assert\NotBlank()
+    * @Assert\Type(type="integer", message="The value {{ value }} is not a valid {{ type }}.")
     */
     protected $amount;
 
     /**
     * @ORM\Column(type="text")
+    * @Assert\NotBlank()
     */
     protected $reference;
 
     /**
     * @ORM\Column(type="string", length=255)
+    * @Assert\NotBlank()
+    * @Assert\Email(message = "The email '{{ value }}' is not a valid email.", checkMX = true, checkHost = true)
     */
     protected $sellerEmail;
 
     /**
     * @ORM\Column(type="string", length=255)
+    * @Assert\NotBlank()
+    * @Assert\Email(message = "The email '{{ value }}' is not a valid email.", checkMX = true, checkHost = true)
     */
     protected $debtorEmail;
 
