@@ -69,7 +69,7 @@ class EmailPlanner
         $day = $date->format('N');
         $hour = $date->format('H');
 
-        if ($hour >= 9 && $hour < 12 && $day > 1 && $day < 5) {
+        if ($hour >= 9 && $hour < 12 && $day > 1 && $day <= 5) {
             return true;
         }
         return false;
@@ -80,7 +80,7 @@ class EmailPlanner
         $day = $date->format('N');
         $hour = $date->format('H');
 
-        if ($hour < 9 && $day > 1 && $day < 5) {
+        if ($hour < 9 && $day > 1 && $day <= 5) {
             return true;
         }
         return false;
@@ -129,8 +129,9 @@ class EmailPlanner
     {
         $day = $date->format('N');
         $hour = $date->format('H');
+        $minute = $date->format('i');
 
-        if (($hour > 17 && $day < 5) || $day == 5)  {
+        if (($hour > 17 && $day < 5) || (($day == 5) && (($hour > 14) || ($hour == 13 && $minute >= 30))))  {
             return true;
         }
         return false;
